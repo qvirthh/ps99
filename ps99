@@ -1,1 +1,1 @@
-loadstring(game:HttpGet("https://eternal-darkness.eu/loaders/d523425ab04301e5e4f3bdc51f66412e.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/chichitkh100/AKUMA-HUB/refs/heads/main/AKUMA%20HUB"))()
