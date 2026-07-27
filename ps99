@@ -1,9 +1,9 @@
 -- Pet Simulator 99 - Summer Event Script
 -- Made By qvirthh
--- Galaxy Theme - Premium UI
+-- Galaxy Theme
 
 print("========================================")
-print("🌌 PS99 Galaxy Script - Made By qvirthh")
+print("🌌 Galaxy Hub | PS99 - Made By qvirthh")
 print("Loading Galaxy Theme...")
 print("========================================")
 
@@ -13,7 +13,6 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Workspace = game:GetService("Workspace")
 local VirtualUser = game:GetService("VirtualUser")
 local HttpService = game:GetService("HttpService")
-local TweenService = game:GetService("TweenService")
 local Player = Players.LocalPlayer
 
 if not Player then
@@ -45,14 +44,17 @@ local remotes = {}
 for _, v in pairs(Network:GetDescendants()) do
     if v:IsA("RemoteEvent") or v:IsA("RemoteFunction") then
         remotes[v.Name] = v
+        print("Found remote: " .. v.Name)
     end
 end
 
 -- Functions
 local function hatchEgg()
+    print("Hatching egg...")
     local hatchNames = {"HatchEgg", "Hatch", "StartHatch", "BuyEgg", "SpawnPet", "EggHatch", "HatchPet"}
     for _, name in pairs(hatchNames) do
         if remotes[name] then
+            print("Firing: " .. name)
             remotes[name]:FireServer()
             task.wait(0.2)
             return true
@@ -62,9 +64,11 @@ local function hatchEgg()
 end
 
 local function buyFromMerchant()
+    print("Buying from merchant...")
     local merchantNames = {"MerchantBuy", "BuyFromMerchant", "PurchaseMerchant", "ShopBuy", "MerchantPurchase"}
     for _, name in pairs(merchantNames) do
         if remotes[name] then
+            print("Firing: " .. name)
             remotes[name]:FireServer("All")
             task.wait(0.2)
             return true
@@ -74,9 +78,11 @@ local function buyFromMerchant()
 end
 
 local function joinEvent()
+    print("Joining event...")
     local eventNames = {"JoinEvent", "EventJoin", "EnterEvent", "TeleportToEvent", "SummerEvent"}
     for _, name in pairs(eventNames) do
         if remotes[name] then
+            print("Firing: " .. name)
             remotes[name]:FireServer("Summer")
             task.wait(0.2)
             return true
@@ -86,9 +92,11 @@ local function joinEvent()
 end
 
 local function doRebirth()
+    print("Doing rebirth...")
     local rebirthNames = {"Rebirth", "DoRebirth", "Prestige", "Reset", "RebirthReset"}
     for _, name in pairs(rebirthNames) do
         if remotes[name] then
+            print("Firing: " .. name)
             remotes[name]:FireServer()
             task.wait(0.2)
             return true
@@ -98,9 +106,11 @@ local function doRebirth()
 end
 
 local function collectAll()
+    print("Collecting all...")
     local collectNames = {"Collect", "CollectAll", "ClaimAll", "PickupAll", "GatherAll"}
     for _, name in pairs(collectNames) do
         if remotes[name] then
+            print("Firing: " .. name)
             remotes[name]:FireServer()
             task.wait(0.1)
             return true
@@ -110,9 +120,11 @@ local function collectAll()
 end
 
 local function plantPlot()
+    print("Planting plot...")
     local plantNames = {"PlantPlot", "Plant", "PlacePlot", "GardenPlant"}
     for _, name in pairs(plantNames) do
         if remotes[name] then
+            print("Firing: " .. name)
             remotes[name]:FireServer()
             task.wait(0.2)
             return true
@@ -122,9 +134,11 @@ local function plantPlot()
 end
 
 local function placePet()
+    print("Placing pet...")
     local petNames = {"PlacePet", "PetPlot", "DeployPet", "PlacePetPlot"}
     for _, name in pairs(petNames) do
         if remotes[name] then
+            print("Firing: " .. name)
             remotes[name]:FireServer()
             task.wait(0.2)
             return true
@@ -133,196 +147,79 @@ local function placePet()
     return false
 end
 
--- Create GUI - GALAXY THEME
+-- Create UI - Galaxy Theme
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "Galaxy_PS99_qvirthh"
 ScreenGui.Parent = Player:WaitForChild("PlayerGui")
 ScreenGui.ResetOnSpawn = false
 
--- Main Frame with Galaxy gradient
+-- Main Frame
 local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.new(0, 450, 0, 580)
-MainFrame.Position = UDim2.new(0.5, -225, 0.5, -290)
-MainFrame.BackgroundColor3 = Color3.fromRGB(8, 0, 20)
-MainFrame.BorderSizePixel = 0
+MainFrame.Size = UDim2.new(0, 420, 0, 550)
+MainFrame.Position = UDim2.new(0.5, -210, 0.5, -275)
+MainFrame.BackgroundColor3 = Color3.fromRGB(10, 0, 25)
+MainFrame.BorderSizePixel = 1
+MainFrame.BorderColor3 = Color3.fromRGB(150, 0, 255)
 MainFrame.Active = true
 MainFrame.Draggable = true
-MainFrame.ClipsDescendants = true
 MainFrame.Parent = ScreenGui
 
--- Galaxy Background Gradient
-local GalaxyGradient = Instance.new("UIGradient")
-GalaxyGradient.Color = ColorSequence.new({
+-- Galaxy Gradient
+local GalaxyGrad = Instance.new("UIGradient")
+GalaxyGrad.Color = ColorSequence.new({
     ColorSequenceKeypoint.new(0, Color3.fromRGB(20, 0, 40)),
-    ColorSequenceKeypoint.new(0.3, Color3.fromRGB(10, 0, 60)),
-    ColorSequenceKeypoint.new(0.6, Color3.fromRGB(5, 0, 80)),
+    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(10, 0, 60)),
     ColorSequenceKeypoint.new(1, Color3.fromRGB(20, 0, 40))
 })
-GalaxyGradient.Rotation = 45
-GalaxyGradient.Parent = MainFrame
+GalaxyGrad.Rotation = 45
+GalaxyGrad.Parent = MainFrame
 
--- Sparkle overlay
-local Sparkles = Instance.new("Frame")
-Sparkles.Size = UDim2.new(1, 0, 1, 0)
-Sparkles.BackgroundTransparency = 1
-Sparkles.Parent = MainFrame
+-- Title
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.Position = UDim2.new(0, 0, 0, 0)
+Title.Text = "🌌 Galaxy Hub | PS99"
+Title.TextColor3 = Color3.fromRGB(200, 150, 255)
+Title.BackgroundColor3 = Color3.fromRGB(20, 0, 50)
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 14
+Title.Parent = MainFrame
 
--- Create sparkle particles
-for i = 1, 30 do
-    local star = Instance.new("Frame")
-    star.Size = UDim2.new(0, math.random(2, 4), 0, math.random(2, 4))
-    star.Position = UDim2.new(math.random() * 0.95, 0, math.random() * 0.95, 0)
-    star.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    star.BackgroundTransparency = 0.7
-    star.BorderSizePixel = 0
-    star.Parent = Sparkles
-    
-    task.spawn(function()
-        while task.wait(math.random(2, 5)) do
-            pcall(function()
-                local tween = TweenService:Create(star, TweenInfo.new(1, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {
-                    BackgroundTransparency = math.random(3, 8) / 10,
-                    Size = UDim2.new(0, math.random(2, 6), 0, math.random(2, 6))
-                })
-                tween:Play()
-            end)
-        end
-    end)
-end
-
--- Border glow
-local BorderGlow = Instance.new("Frame")
-BorderGlow.Size = UDim2.new(1, 4, 1, 4)
-BorderGlow.Position = UDim2.new(-0.005, 0, -0.005, 0)
-BorderGlow.BackgroundTransparency = 1
-BorderGlow.BorderSizePixel = 2
-BorderGlow.BorderColor3 = Color3.fromRGB(150, 0, 255)
-BorderGlow.Parent = MainFrame
-
--- Title Bar - Galaxy
-local TitleBar = Instance.new("Frame")
-TitleBar.Size = UDim2.new(1, 0, 0, 55)
-TitleBar.BackgroundColor3 = Color3.fromRGB(15, 0, 30)
-TitleBar.BackgroundTransparency = 0.3
-TitleBar.BorderSizePixel = 0
-TitleBar.Parent = MainFrame
-
-local TitleGradient = Instance.new("UIGradient")
-TitleGradient.Color = ColorSequence.new({
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(80, 0, 150)),
-    ColorSequenceKeypoint.new(0.5, Color3.fromRGB(150, 0, 200)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 0, 150))
-})
-TitleGradient.Parent = TitleBar
-
-local TitleText = Instance.new("TextLabel")
-TitleText.Size = UDim2.new(0.85, 0, 0.7, 0)
-TitleText.Position = UDim2.new(0.05, 0, 0.1, 0)
-TitleText.Text = "🌌 Galaxy Hub | PS99"
-TitleText.TextColor3 = Color3.fromRGB(200, 150, 255)
-TitleText.BackgroundTransparency = 1
-TitleText.TextXAlignment = Enum.TextXAlignment.Left
-TitleText.Font = Enum.Font.GothamBold
-TitleText.TextSize = 18
-TitleText.Parent = TitleBar
-
--- Glow effect on title
-local TitleGlow = Instance.new("TextLabel")
-TitleGlow.Size = UDim2.new(0.85, 0, 0.7, 0)
-TitleGlow.Position = UDim2.new(0.05, 0, 0.1, 0)
-TitleGlow.Text = "🌌 Galaxy Hub | PS99"
-TitleGlow.TextColor3 = Color3.fromRGB(150, 0, 255)
-TitleGlow.BackgroundTransparency = 1
-TitleGlow.TextXAlignment = Enum.TextXAlignment.Left
-TitleGlow.Font = Enum.Font.GothamBold
-TitleGlow.TextSize = 18
-TitleGlow.TextTransparency = 0.5
-TitleGlow.Parent = TitleBar
-
-local SubTitle3 = Instance.new("TextLabel")
-SubTitle3.Size = UDim2.new(0.85, 0, 0.3, 0)
-SubTitle3.Position = UDim2.new(0.05, 0, 0.7, 0)
-SubTitle3.Text = "✦ Made By qvirthh ✦"
-SubTitle3.TextColor3 = Color3.fromRGB(180, 120, 255)
-SubTitle3.BackgroundTransparency = 1
-SubTitle3.TextXAlignment = Enum.TextXAlignment.Left
-SubTitle3.Font = Enum.Font.Gotham
-SubTitle3.TextSize = 11
-SubTitle3.Parent = TitleBar
+local SubTitle2 = Instance.new("TextLabel")
+SubTitle2.Size = UDim2.new(1, 0, 0, 20)
+SubTitle2.Position = UDim2.new(0, 0, 0, 22)
+SubTitle2.Text = "✦ Made By qvirthh ✦"
+SubTitle2.TextColor3 = Color3.fromRGB(180, 120, 255)
+SubTitle2.BackgroundTransparency = 1
+SubTitle2.Font = Enum.Font.Gotham
+SubTitle2.TextSize = 11
+SubTitle2.Parent = MainFrame
 
 -- Close Button
 local CloseBtn = Instance.new("TextButton")
-CloseBtn.Size = UDim2.new(0, 35, 1, -10)
-CloseBtn.Position = UDim2.new(1, -40, 0, 5)
-CloseBtn.Text = "✕"
+CloseBtn.Size = UDim2.new(0, 30, 1, 0)
+CloseBtn.Position = UDim2.new(1, -30, 0, 0)
+CloseBtn.Text = "X"
 CloseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 CloseBtn.BackgroundColor3 = Color3.fromRGB(150, 0, 200)
 CloseBtn.Font = Enum.Font.GothamBold
-CloseBtn.TextSize = 16
+CloseBtn.TextSize = 14
 CloseBtn.BorderSizePixel = 0
-CloseBtn.Parent = TitleBar
-
-local CloseCorner = Instance.new("UICorner")
-CloseCorner.CornerRadius = UDim.new(0, 4)
-CloseCorner.Parent = CloseBtn
+CloseBtn.Parent = Title
 
 CloseBtn.MouseButton1Click:Connect(function()
     ScreenGui:Destroy()
 end)
 
--- Minimize Button
-local MinBtn = Instance.new("TextButton")
-MinBtn.Size = UDim2.new(0, 35, 1, -10)
-MinBtn.Position = UDim2.new(1, -80, 0, 5)
-MinBtn.Text = "─"
-MinBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-MinBtn.BackgroundColor3 = Color3.fromRGB(80, 0, 150)
-MinBtn.Font = Enum.Font.GothamBold
-MinBtn.TextSize = 16
-MinBtn.BorderSizePixel = 0
-MinBtn.Parent = TitleBar
-
-local MinCorner = Instance.new("UICorner")
-MinCorner.CornerRadius = UDim.new(0, 4)
-MinCorner.Parent = MinBtn
-
-local minimized = false
-MinBtn.MouseButton1Click:Connect(function()
-    minimized = not minimized
-    MainFrame.Size = minimized and UDim2.new(0, 450, 0, 55) or UDim2.new(0, 450, 0, 580)
-    ScrollFrame.Visible = not minimized
-    MinBtn.Text = minimized and "□" or "─"
-end)
-
--- Scrolling Frame
-local ScrollFrame = Instance.new("ScrollingFrame")
-ScrollFrame.Size = UDim2.new(1, 0, 1, -55)
-ScrollFrame.Position = UDim2.new(0, 0, 0, 55)
-ScrollFrame.BackgroundTransparency = 1
-ScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
-ScrollFrame.ScrollBarThickness = 4
-ScrollFrame.ScrollBarImageColor3 = Color3.fromRGB(150, 0, 255)
-ScrollFrame.Parent = MainFrame
-
-local Canvas = Instance.new("Frame")
-Canvas.Size = UDim2.new(1, 0, 0, 0)
-Canvas.BackgroundTransparency = 1
-Canvas.Parent = ScrollFrame
-
--- Create Toggle Function - Galaxy Style
+-- Create Toggle Function - Galaxy
 local function createToggle(parent, text, yPos, callback)
     local frame = Instance.new("Frame")
-    frame.Size = UDim2.new(0.95, 0, 0, 38)
+    frame.Size = UDim2.new(0.95, 0, 0, 35)
     frame.Position = UDim2.new(0.025, 0, 0, yPos)
-    frame.BackgroundColor3 = Color3.fromRGB(20, 0, 40)
-    frame.BackgroundTransparency = 0.3
+    frame.BackgroundColor3 = Color3.fromRGB(20, 0, 45)
     frame.BorderSizePixel = 1
     frame.BorderColor3 = Color3.fromRGB(100, 0, 200)
     frame.Parent = parent
-    
-    local corner = Instance.new("UICorner")
-    corner.CornerRadius = UDim.new(0, 6)
-    corner.Parent = frame
     
     local label = Instance.new("TextLabel")
     label.Size = UDim2.new(0.7, 0, 1, 0)
@@ -336,7 +233,7 @@ local function createToggle(parent, text, yPos, callback)
     label.Parent = frame
     
     local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(0, 60, 0, 28)
+    btn.Size = UDim2.new(0, 60, 0, 25)
     btn.Position = UDim2.new(1, -65, 0, 5)
     btn.Text = "OFF"
     btn.TextColor3 = Color3.fromRGB(255, 200, 200)
@@ -345,10 +242,6 @@ local function createToggle(parent, text, yPos, callback)
     btn.TextSize = 12
     btn.BorderSizePixel = 0
     btn.Parent = frame
-    
-    local btnCorner = Instance.new("UICorner")
-    btnCorner.CornerRadius = UDim.new(0, 4)
-    btnCorner.Parent = btn
     
     local state = false
     
@@ -363,10 +256,10 @@ local function createToggle(parent, text, yPos, callback)
     return btn
 end
 
--- Create Button Function - Galaxy Style
+-- Create Button Function - Galaxy
 local function createButton(parent, text, yPos, callback)
     local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(0.95, 0, 0, 42)
+    btn.Size = UDim2.new(0.95, 0, 0, 40)
     btn.Position = UDim2.new(0.025, 0, 0, yPos)
     btn.Text = text
     btn.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -376,37 +269,22 @@ local function createButton(parent, text, yPos, callback)
     btn.BorderSizePixel = 0
     btn.Parent = parent
     
-    local corner = Instance.new("UICorner")
-    corner.CornerRadius = UDim.new(0, 6)
-    corner.Parent = btn
-    
-    local glow = Instance.new("UIGradient")
-    glow.Color = ColorSequence.new({
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(150, 0, 255)),
-        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(200, 0, 255)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(150, 0, 255))
-    })
-    glow.Parent = btn
-    
     btn.MouseEnter:Connect(function()
-        TweenService:Create(btn, TweenInfo.new(0.2), {
-            BackgroundColor3 = Color3.fromRGB(120, 0, 200)
-        }):Play()
+        btn.BackgroundColor3 = Color3.fromRGB(120, 0, 200)
     end)
     btn.MouseLeave:Connect(function()
-        TweenService:Create(btn, TweenInfo.new(0.2), {
-            BackgroundColor3 = Color3.fromRGB(80, 0, 150)
-        }):Play()
+        btn.BackgroundColor3 = Color3.fromRGB(80, 0, 150)
     end)
     
     btn.MouseButton1Click:Connect(function()
+        print("Button clicked: " .. text)
         callback()
     end)
     
     return btn
 end
 
--- Create Label Function - Galaxy Style
+-- Create Label Function - Galaxy
 local function createLabel(parent, text, yPos, color)
     local label = Instance.new("TextLabel")
     label.Size = UDim2.new(0.95, 0, 0, 25)
@@ -420,12 +298,28 @@ local function createLabel(parent, text, yPos, color)
     return label
 end
 
+-- Scrolling Frame
+local ScrollFrame = Instance.new("ScrollingFrame")
+ScrollFrame.Size = UDim2.new(1, 0, 1, -40)
+ScrollFrame.Position = UDim2.new(0, 0, 0, 40)
+ScrollFrame.BackgroundTransparency = 1
+ScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+ScrollFrame.ScrollBarThickness = 4
+ScrollFrame.ScrollBarImageColor3 = Color3.fromRGB(150, 0, 255)
+ScrollFrame.Parent = MainFrame
+
+local Canvas = Instance.new("Frame")
+Canvas.Size = UDim2.new(1, 0, 0, 0)
+Canvas.BackgroundTransparency = 1
+Canvas.Parent = ScrollFrame
+
 -- Create toggles
 local yPos = 10
 
 -- Auto Farm
 createToggle(Canvas, "⚡ Auto Farm", yPos, function(state)
     AutoFarm = state
+    print("Auto Farm: " .. tostring(state))
     if state then
         task.spawn(function()
             while AutoFarm and task.wait(0.1) do
@@ -440,102 +334,124 @@ createToggle(Canvas, "⚡ Auto Farm", yPos, function(state)
         end)
     end
 end)
-yPos = yPos + 48
+yPos = yPos + 45
 
 -- Auto Join Event
 createToggle(Canvas, "🎪 Auto Join Event (Garden)", yPos, function(state)
     AutoEvent = state
+    print("Auto Event: " .. tostring(state))
     if state then
         task.spawn(function()
             while AutoEvent and task.wait(2) do
-                pcall(function() joinEvent() end)
+                pcall(function()
+                    joinEvent()
+                end)
             end
         end)
     end
 end)
-yPos = yPos + 48
+yPos = yPos + 45
 
 -- Auto Plant Plot
 createToggle(Canvas, "🌱 Auto Plant Plot (Pillars)", yPos, function(state)
     AutoPlant = state
+    print("Auto Plant: " .. tostring(state))
     if state then
         task.spawn(function()
             while AutoPlant and task.wait(1) do
-                pcall(function() plantPlot() end)
+                pcall(function()
+                    plantPlot()
+                end)
             end
         end)
     end
 end)
-yPos = yPos + 48
+yPos = yPos + 45
 
 -- Auto Pet Plot
 createToggle(Canvas, "🐾 Auto Pet Plot (Lanes)", yPos, function(state)
     AutoPet = state
+    print("Auto Pet: " .. tostring(state))
     if state then
         task.spawn(function()
             while AutoPet and task.wait(1) do
-                pcall(function() placePet() end)
+                pcall(function()
+                    placePet()
+                end)
             end
         end)
     end
 end)
-yPos = yPos + 48
+yPos = yPos + 45
 
 -- Auto Collect
 createToggle(Canvas, "💰 Auto Collect", yPos, function(state)
     AutoCollect = state
+    print("Auto Collect: " .. tostring(state))
     if state then
         task.spawn(function()
             while AutoCollect and task.wait(0.5) do
-                pcall(function() collectAll() end)
+                pcall(function()
+                    collectAll()
+                end)
             end
         end)
     end
 end)
-yPos = yPos + 48
+yPos = yPos + 45
 
 -- Auto Hatch
 createToggle(Canvas, "🥚 Auto Hatch", yPos, function(state)
     AutoHatch = state
+    print("Auto Hatch: " .. tostring(state))
     if state then
         task.spawn(function()
             while AutoHatch and task.wait(2) do
-                pcall(function() hatchEgg() end)
+                pcall(function()
+                    hatchEgg()
+                end)
             end
         end)
     end
 end)
-yPos = yPos + 48
+yPos = yPos + 45
 
 -- Auto Merchant
 createToggle(Canvas, "🛒 Auto Merchant", yPos, function(state)
     AutoMerchant = state
+    print("Auto Merchant: " .. tostring(state))
     if state then
         task.spawn(function()
             while AutoMerchant and task.wait(3) do
-                pcall(function() buyFromMerchant() end)
+                pcall(function()
+                    buyFromMerchant()
+                end)
             end
         end)
     end
 end)
-yPos = yPos + 48
+yPos = yPos + 45
 
 -- Auto Rebirth
 createToggle(Canvas, "🔄 Auto Rebirth", yPos, function(state)
     AutoRebirth = state
+    print("Auto Rebirth: " .. tostring(state))
     if state then
         task.spawn(function()
             while AutoRebirth and task.wait(3) do
-                pcall(function() doRebirth() end)
+                pcall(function()
+                    doRebirth()
+                end)
             end
         end)
     end
 end)
-yPos = yPos + 48
+yPos = yPos + 45
 
 -- Anti AFK
 createToggle(Canvas, "🛡️ Anti AFK", yPos, function(state)
     AntiAFK = state
+    print("Anti AFK: " .. tostring(state))
     if state then
         task.spawn(function()
             while AntiAFK and task.wait(60) do
@@ -547,11 +463,12 @@ createToggle(Canvas, "🛡️ Anti AFK", yPos, function(state)
         end)
     end
 end)
-yPos = yPos + 48
+yPos = yPos + 45
 
 -- Hide Egg Animation
 createToggle(Canvas, "🎬 Hide Egg Animation", yPos, function(state)
     HideEggAnim = state
+    print("Hide Egg Animation: " .. tostring(state))
     pcall(function()
         local eggAnim = Player.PlayerGui:FindFirstChild("EggAnimation")
         if eggAnim then
@@ -559,53 +476,39 @@ createToggle(Canvas, "🎬 Hide Egg Animation", yPos, function(state)
         end
     end)
 end)
-yPos = yPos + 48
-
--- Divider
-local Divider = Instance.new("Frame")
-Divider.Size = UDim2.new(0.9, 0, 0, 2)
-Divider.Position = UDim2.new(0.05, 0, 0, yPos)
-Divider.BackgroundColor3 = Color3.fromRGB(150, 0, 255)
-Divider.BackgroundTransparency = 0.5
-Divider.Parent = Canvas
-yPos = yPos + 12
+yPos = yPos + 45
 
 -- Manual Buttons
+yPos = yPos + 5
+
 createButton(Canvas, "✨ REBIRTH NOW", yPos, function()
+    print("=== MANUAL REBIRTH ===")
     doRebirth()
 end)
-yPos = yPos + 52
+yPos = yPos + 50
 
 createButton(Canvas, "🥚 HATCH EGG NOW", yPos, function()
+    print("=== MANUAL HATCH ===")
     hatchEgg()
 end)
-yPos = yPos + 52
+yPos = yPos + 50
 
 createButton(Canvas, "💰 COLLECT ALL NOW", yPos, function()
+    print("=== MANUAL COLLECT ===")
     collectAll()
 end)
-yPos = yPos + 52
-
-createButton(Canvas, "🌌 CHECK REMOTES", yPos, function()
-    print("=== GALAXY REMOTES ===")
-    for name, _ in pairs(remotes) do
-        print("Remote: " .. name)
-    end
-    print("=== TOTAL: " .. #remotes .. " remotes ===")
-end)
-yPos = yPos + 52
+yPos = yPos + 50
 
 -- Status
 createLabel(Canvas, "✦ Made By qvirthh | Galaxy Script ✦", yPos, Color3.fromRGB(200, 150, 255))
 yPos = yPos + 30
 
 -- Update canvas
-Canvas.Size = UDim2.new(1, 0, 0, yPos + 20)
+Canvas.Size = UDim2.new(1, 0, 0, yPos + 10)
 
 print("========================================")
-print("🌌 Galaxy Script Loaded Successfully!")
-print("✦ Made By qvirthh")
-print("🌠 Galaxy Theme Active")
+print("🌌 Galaxy Hub | PS99 - Made By qvirthh")
+print("✅ Script Loaded Successfully!")
 print("========================================")
 
 -- Auto Anti AFK in background
@@ -616,33 +519,4 @@ task.spawn(function()
             VirtualUser:ClickButton2(Vector2.new())
         end)
     end
-end)
-
--- Galaxy Notification
-task.spawn(function()
-    pcall(function()
-        local notif = Instance.new("TextLabel")
-        notif.Size = UDim2.new(0, 350, 0, 40)
-        notif.Position = UDim2.new(0.5, -175, 0, 10)
-        notif.Text = "🌌 Galaxy Hub | Made By qvirthh"
-        notif.TextColor3 = Color3.fromRGB(200, 150, 255)
-        notif.BackgroundColor3 = Color3.fromRGB(20, 0, 40)
-        notif.Font = Enum.Font.GothamBold
-        notif.TextSize = 14
-        notif.BorderSizePixel = 1
-        notif.BorderColor3 = Color3.fromRGB(150, 0, 255)
-        notif.Parent = ScreenGui
-        
-        local corner = Instance.new("UICorner")
-        corner.CornerRadius = UDim.new(0, 8)
-        corner.Parent = notif
-        
-        task.wait(3)
-        TweenService:Create(notif, TweenInfo.new(0.5), {
-            BackgroundTransparency = 1,
-            TextTransparency = 1
-        }):Play()
-        task.wait(0.5)
-        notif:Destroy()
-    end)
 end)
