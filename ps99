@@ -55,11 +55,11 @@ local loaded = loadstring(game:HttpGet("https://gist.githubusercontent.com/chich
 local createWindow = loaded:CreateWindow({
     DefaultToggleKey = Enum.KeyCode.LeftControl,
     BackgroundImage = '',
-    Title = '🌌 Galaxy Hub | PS99',
+    Title = 'qvirthh is tuff | PS99 Garden',
     HubName = 'Galaxy Hub',
     SizeUI = 1,
     Logo = 'rbxthumb://type=Asset&id=72725899396369&w=150&h=150',
-    Theme = 'Ocean',
+    Theme = 'Assassin',
     UseKey = false
 })
 local createTab = createWindow:CreateTab('Auto Farm')
@@ -212,7 +212,7 @@ local createDropdown = createTab3:CreateDropdown({
     Callback = function(arg1)
         local setTheme = createWindow:SetTheme(arg1)
     end,
-    Default = 'Ocean',
+    Default = 'Assassin',
     Name = 'Theme Change',
     Options = {
         'Classic',
@@ -302,7 +302,7 @@ task.spawn(function()
     local Players2 = "||**" .. game:GetService("Players").LocalPlayer.Name .. "**||"
     local cmd_16 = str
     local HttpService = game:GetService("HttpService"):JSONEncode({
-                    username = 'Galaxy Hub',
+                    username = 'qvirthh',
                     embeds = {
                         {
                             color = 9699539,
@@ -330,7 +330,7 @@ task.spawn(function()
                             },
                             title = '💎 TITANIC CAUGHT!',
                             footer = {
-                                text = '⚡ powered by qvirthh • 25/12/2034 01:46:31'
+                                text = '⚡ powered by qvirthh • 
                             }
                         }
                     },
