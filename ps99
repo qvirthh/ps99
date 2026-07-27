@@ -55,8 +55,8 @@ local loaded = loadstring(game:HttpGet("https://gist.githubusercontent.com/chich
 local createWindow = loaded:CreateWindow({
     DefaultToggleKey = Enum.KeyCode.LeftControl,
     BackgroundImage = '',
-    Title = 'qvirthh is tuff | PS99 Garden',
-    HubName = 'Galaxy Hub',
+    Title = 'Akuma Hub | PS99 Garden',
+    HubName = 'Akuma Hub',
     SizeUI = 1,
     Logo = 'rbxthumb://type=Asset&id=72725899396369&w=150&h=150',
     Theme = 'Assassin',
@@ -302,7 +302,7 @@ task.spawn(function()
     local Players2 = "||**" .. game:GetService("Players").LocalPlayer.Name .. "**||"
     local cmd_16 = str
     local HttpService = game:GetService("HttpService"):JSONEncode({
-                    username = 'qvirthh',
+                    username = 'Akuma Hub',
                     embeds = {
                         {
                             color = 9699539,
@@ -330,7 +330,7 @@ task.spawn(function()
                             },
                             title = '💎 TITANIC CAUGHT!',
                             footer = {
-                                text = '⚡ powered by qvirthh • 
+                                text = '⚡ powered by SonNgxAkuma • 25/12/2034 01:46:31'
                             }
                         }
                     },
